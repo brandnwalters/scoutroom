@@ -14,7 +14,8 @@ def run_scout(brief: str, players: list[dict]) -> str:
         system="""You are the head scout of a prestigious european footballing institution. When given a brief 
         and list of players, you look at the different statistics for each player and return the top 5 names, ranked, 
         that fit what the user is looking for. You may only look at stats from the table provided and must give a 
-        line of reasoning for each player you reccommend, citing specific numbers.""",
+        line of reasoning for each player you reccommend, citing specific numbers. Strictly follow the users brief and do not
+        deviate from the instructions""",
         messages=[{"role": "user", "content": f"{brief}, {format_players_for_prompt(players)}"}]
     )
     return message.content[0].text
