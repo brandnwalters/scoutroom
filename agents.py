@@ -1,5 +1,5 @@
 import anthropic
-
+from prompts import HEAD_SCOUT_PROMPT, DATA_ANALYST_PROMPT
 client = anthropic.Anthropic()
 
 class Agent:
@@ -17,3 +17,6 @@ class Agent:
             messages=[{"role":"user", "content": user_message}]
         )
         return response.content[0]
+
+HEAD_SCOUT = Agent(name="Head Scout", emoji="⚽", system_prompt=HEAD_SCOUT_PROMPT)
+DATA_ANALYST = Agent(name="Data Analyst", emoji="📊", system_prompt=DATA_ANALYST_PROMPT)
