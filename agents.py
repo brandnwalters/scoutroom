@@ -1,5 +1,5 @@
 import anthropic
-from prompts import HEAD_SCOUT_PROMPT, DATA_ANALYST_PROMPT
+from prompts import HEAD_SCOUT_PROMPT, DATA_ANALYST_PROMPT, NEWS_RESEARCHER_PROMPT, SPORTING_DIRECTOR_PROMPT, RECRUITMENT_DIRECTOR_PROMPT
 client = anthropic.Anthropic()
 
 class Agent:
@@ -20,3 +20,6 @@ class Agent:
 
 HEAD_SCOUT = Agent(name="Head Scout", emoji="⚽", system_prompt=HEAD_SCOUT_PROMPT)
 DATA_ANALYST = Agent(name="Data Analyst", emoji="📊", system_prompt=DATA_ANALYST_PROMPT)
+NEWS_RESEARCHER = Agent(name="News Researcher", emoji="📰", system_prompt=NEWS_RESEARCHER_PROMPT)
+SPORTING_DIRECTOR = Agent(name="Sporting Director", emoji="💰", system_prompt=SPORTING_DIRECTOR_PROMPT)
+RECRUITMENT_DIRECTOR= Agent(name="Recruitment Director", emoji="🎯", system_prompt= RECRUITMENT_DIRECTOR_PROMPT, model="claude-sonnet-5")
