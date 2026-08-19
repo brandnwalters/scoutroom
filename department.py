@@ -52,4 +52,5 @@ def run_recruitment(brief: str, players:list[dict]) -> dict:
 if __name__ == "__main__":
     players = load_players()
     result = run_recruitment(sys.argv[1], players)
+    print(json.dumps(result["decision"], indent=2))
 

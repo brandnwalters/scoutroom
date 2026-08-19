@@ -14,7 +14,7 @@ def extract_json_span(text: str) -> str:
         if i != -1:
             ends.append(i)
     if not ends:
-        raise Exception(f"No brackets found at end: {text[:300]}")
+        raise Exception(f"No brackets found at end: {text[:500]}")
     end = max(ends) + 1
 
     return text[start:end]
@@ -34,7 +34,7 @@ def parse_json_response(text: str):
     except json.JSONDecodeError as e:
         raise Exception(
             f"Could not parse JSON after cleaning\n"
-            f"Raw response: {text[:300]}"
+            f"Raw response: {text[:500]}"
         ) from e
     
 
