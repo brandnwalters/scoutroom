@@ -1,8 +1,9 @@
 import os
+import sys
 import json
 from utils import parse_json_response
 from agents import DATA_ANALYST, NEWS_RESEARCHER, SPORTING_DIRECTOR, HEAD_SCOUT, RECRUITMENT_DIRECTOR
-from data import format_players_for_prompt
+from data import format_players_for_prompt, load_players
 
 def build_dossier(player: dict, scout_pick: dict) -> dict:
     pid = player["player_id"]
@@ -45,8 +46,10 @@ def run_recruitment(brief: str, players:list[dict]) -> dict:
 
     dossiers = [build_dossier(row, scout_pick) for row, scout_pick in shortlist]
     print(json.dumps(dossiers[0], indent=2))
-    decision = parse_json_response(RECRUITMENT_DIRECTOR.run(json.dumps(dossiers)))
+    decision = parse_json_response(RECRUITMENT_DIRECTOR.run(json.dumps(dossiers), max_tokens=4000))
     return {"decision": decision, "dossiers": dossiers}
 
-
+if __name__ == "__main__":
+    players = load_players()
+    result = run_recruitment(sys.argv[1], players)
 

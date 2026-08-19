@@ -1,3 +1,6 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 import anthropic
 from prompts import HEAD_SCOUT_PROMPT, DATA_ANALYST_PROMPT, NEWS_RESEARCHER_PROMPT, SPORTING_DIRECTOR_PROMPT, RECRUITMENT_DIRECTOR_PROMPT
 client = anthropic.Anthropic()
@@ -16,7 +19,9 @@ class Agent:
             system=self.system_prompt,
             messages=[{"role":"user", "content": user_message}]
         )
-        return response.content[0]
+        if response.stop_reason == "max_tokens":
+            print(f"⚠️  {self.name} hit max_tokens — output truncated")
+        return response.content[0].text
 
 HEAD_SCOUT = Agent(name="Head Scout", emoji="⚽", system_prompt=HEAD_SCOUT_PROMPT)
 DATA_ANALYST = Agent(name="Data Analyst", emoji="📊", system_prompt=DATA_ANALYST_PROMPT)

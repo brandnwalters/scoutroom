@@ -6,7 +6,7 @@ def extract_json_span(text: str) -> str:
         if i != -1:
             starts.append(i)
     if not starts:
-        raise Exception("No brackets found at beggining: {text[:300]}")
+        raise Exception(f"No brackets found at beggining: {text[:300]}")
     start = min(starts)
 
     ends=[]
@@ -14,7 +14,7 @@ def extract_json_span(text: str) -> str:
         if i != -1:
             ends.append(i)
     if not ends:
-        raise Exception("No brackets found at end: {text[:300]}")
+        raise Exception(f"No brackets found at end: {text[:300]}")
     end = max(ends) + 1
 
     return text[start:end]
