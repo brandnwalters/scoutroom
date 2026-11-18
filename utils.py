@@ -1,5 +1,6 @@
 import json
 
+
 def extract_json_span(text: str) -> str:
     starts = []
     for i in (text.find("["), text.find("{")):
@@ -9,7 +10,7 @@ def extract_json_span(text: str) -> str:
         raise Exception(f"No brackets found at beggining: {text[:300]}")
     start = min(starts)
 
-    ends=[]
+    ends = []
     for i in (text.find("]"), text.find("}")):
         if i != -1:
             ends.append(i)
@@ -18,7 +19,6 @@ def extract_json_span(text: str) -> str:
     end = max(ends) + 1
 
     return text[start:end]
-
 
 
 def parse_json_response(text: str):
@@ -33,8 +33,5 @@ def parse_json_response(text: str):
         return json.loads(cleaned)
     except json.JSONDecodeError as e:
         raise Exception(
-            f"Could not parse JSON after cleaning\n"
-            f"Raw response: {text[:500]}"
+            f"Could not parse JSON after cleaning\nRaw response: {text[:500]}"
         ) from e
-    
-
